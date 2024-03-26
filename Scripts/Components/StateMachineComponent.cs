@@ -6,13 +6,14 @@ using System;
 /// Provide state machine functionality to a node
 /// </summary>
 [GlobalClass]
-public partial class StateMachineComponent : Node
+public partial class StateMachineComponent : Label
 {
     [Signal] public delegate void state_changeEventHandler(string stateName, Dictionary payload = null);
 
+    [Export] public bool Debug = false;
     [Export] protected NodePath InitialState;
 
-    public State State;
+    public StateComponent State;
     public Node RootNode;
 
     /// <summary>
@@ -20,18 +21,17 @@ public partial class StateMachineComponent : Node
     /// </summary>
     public override void _Ready()
     {
-        state_change += ChangeTo;
-        
         RootNode = GetOwner<Node>();
+        State = GetNode<StateComponent>(InitialState);
+        Visible = Debug;
 
-        State = GetNode<State>(InitialState);
-
-        foreach (State childState in GetChildren())
+        foreach (StateComponent childState in GetChildren())
         {
             childState.StateMachine = this;
             childState.Initialize();
         }
         State.Enter();
+        Text = State.Name;
     }
 
     /// <summary>
@@ -75,8 +75,9 @@ public partial class StateMachineComponent : Node
         }
 
         State.Exit();
-        State = GetNode<State>(toState);
+        State = GetNode<StateComponent>(toState);
         State.Enter(message);
+        Text = State.Name;
         Log.Debug($"{RootNode.Name} entered state {toState}");
         EmitSignal(SignalName.state_change, toState, message);
     }

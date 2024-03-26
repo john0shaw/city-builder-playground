@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://b1pywjulbn430"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://b1pywjulbn430"]
 
 [ext_resource type="Texture2D" uid="uid://b1rgjvc5orh4b" path="res://Media/Art/World/Shore.png" id="1_e267j"]
 [ext_resource type="Texture2D" uid="uid://4bino4e6t3js" path="res://Media/Art/World/Grass.png" id="2_j6bfs"]
@@ -41,6 +41,20 @@ texture = ExtResource("2_j6bfs")
 4:0/0 = 0
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b248k"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fxtv3"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8mtmm"]
 texture = ExtResource("3_378qx")
@@ -101,6 +115,7 @@ texture = ExtResource("3_378qx")
 1:1/0/terrains_peering_bit/bottom_left_corner = 0
 1:1/0/terrains_peering_bit/top_left_corner = 0
 1:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_b248k")
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 0
@@ -170,6 +185,7 @@ texture = ExtResource("3_378qx")
 1:4/0 = 0
 1:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:4/0/physics_layer_0/angular_velocity = 0.0
+1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_fxtv3")
 2:4/0 = 0
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
@@ -463,6 +479,7 @@ terrain_set_0/terrain_0/name = "GrassWaterCliffs"
 terrain_set_0/terrain_0/color = Color(0.635294, 0, 0.615686, 1)
 terrain_set_0/terrain_1/name = "Mountain"
 terrain_set_0/terrain_1/color = Color(0.219608, 0.337255, 1, 1)
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_4hgwe")
 sources/1 = SubResource("TileSetAtlasSource_vxard")
 sources/2 = SubResource("TileSetAtlasSource_8mtmm")

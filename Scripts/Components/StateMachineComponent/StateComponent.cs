@@ -6,7 +6,7 @@ using System;
 /// Base state class - not intended for specific use
 /// </summary>
 [GlobalClass]
-public partial class State : Node
+public partial class StateComponent : Node
 {
     public StateMachineComponent StateMachine;
 

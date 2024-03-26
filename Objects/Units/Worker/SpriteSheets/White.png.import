@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf8cx37srpbsq"
-path="res://.godot/imported/Green.png-4cd433cc62523efb7544f6b801f6468f.ctex"
+uid="uid://dr8omeuu01ypa"
+path="res://.godot/imported/White.png-47b1568e5209e3793c2be31dc5f8f139.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Units/Worker/SpriteSheets/Green.png"
-dest_files=["res://.godot/imported/Green.png-4cd433cc62523efb7544f6b801f6468f.ctex"]
+source_file="res://Objects/Units/Worker/SpriteSheets/White.png"
+dest_files=["res://.godot/imported/White.png-47b1568e5209e3793c2be31dc5f8f139.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

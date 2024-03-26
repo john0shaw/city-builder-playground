@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4gbouaxrykfp"
-path="res://.godot/imported/Purple.png-2a50eb55dbc65c781d94c158c6c0e1de.ctex"
+uid="uid://cupsbkwilpvxs"
+path="res://.godot/imported/Red.png-d70fab3f792dbf0d9b12a7564eb15ba7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Units/Worker/SpriteSheets/Purple.png"
-dest_files=["res://.godot/imported/Purple.png-2a50eb55dbc65c781d94c158c6c0e1de.ctex"]
+source_file="res://Objects/Units/Worker/SpriteSheets/Red.png"
+dest_files=["res://.godot/imported/Red.png-d70fab3f792dbf0d9b12a7564eb15ba7.ctex"]
 
 [params]
 

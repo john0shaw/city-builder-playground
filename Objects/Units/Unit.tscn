@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6ey1v654xnk3"]
+
+[ext_resource type="Script" path="res://Objects/Units/UnitNode.cs" id="1_bjvp6"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/UnitAnimationComponent.cs" id="3_d2cm1"]
+[ext_resource type="Script" path="res://Scripts/Components/SpriteComponent.cs" id="4_2gdcc"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/NavigationComponent.cs" id="4_xo8q1"]
+[ext_resource type="Script" path="res://Scripts/Components/StateMachineComponent/StateComponent.cs" id="6_ao3sa"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/States/MoveToPosition.cs" id="7_wcp6k"]
+[ext_resource type="Script" path="res://Scripts/Components/StateMachineComponent.cs" id="8_c0m86"]
+
+[sub_resource type="Animation" id="Animation_genhb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteComponent:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ey0db"]
+_data = {
+"RESET": SubResource("Animation_genhb")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsafl"]
+radius = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_73b6g"]
+font_size = 10
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Unit" type="CharacterBody2D"]
+script = ExtResource("1_bjvp6")
+
+[node name="SpriteComponent" type="Sprite2D" parent="."]
+hframes = 5
+vframes = 12
+script = ExtResource("4_2gdcc")
+
+[node name="AnimationComponent" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ey0db")
+}
+speed_scale = 0.5
+script = ExtResource("3_d2cm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nsafl")
+
+[node name="NavigationComponent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("4_xo8q1")
+
+[node name="StateMachineComponent" type="Label" parent="."]
+custom_minimum_size = Vector2(75, 0)
+offset_left = -39.0
+offset_top = -20.0
+offset_right = 41.0
+offset_bottom = -6.0
+text = "STATE"
+label_settings = SubResource("LabelSettings_73b6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+script = ExtResource("8_c0m86")
+Debug = true
+InitialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachineComponent"]
+script = ExtResource("6_ao3sa")
+
+[node name="MoveToPosition" type="Node" parent="StateMachineComponent"]
+script = ExtResource("7_wcp6k")

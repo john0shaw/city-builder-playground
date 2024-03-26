@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class BuildableItemResource : Resource
+public partial class BuildableObjectResource : Resource
 {
     public enum ColorEnum
     {
