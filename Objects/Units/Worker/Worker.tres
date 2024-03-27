@@ -10,7 +10,10 @@
 [resource]
 script = ExtResource("6_3n24s")
 Type = 0
+Health = 10.0
 Name = "Worker"
+SpriteSheetColumns = 5
+SpriteSheetRows = 12
 SpriteSheetWhite = ExtResource("5_wn82s")
 SpriteSheetBlue = ExtResource("1_e3c33")
 SpriteSheetRed = ExtResource("4_ul1q2")

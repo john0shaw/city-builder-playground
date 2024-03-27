@@ -30,6 +30,7 @@ _data = {
 [node name="Worker" instance=ExtResource("1_qjvfv")]
 script = ExtResource("2_mml8r")
 Resource = ExtResource("3_v42eh")
+DebugEnabled = true
 
 [node name="SpriteComponent" parent="." index="0"]
 texture = ExtResource("4_nl3cn")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=7 format=3 uid="uid://dw640cigq0ljk"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/UnitResource.cs" id="1_07li1"]
+[ext_resource type="Texture2D" uid="uid://byigyl18as7yu" path="res://Objects/Units/Swordsman/SpriteSheets/Blue.png" id="1_x3p2t"]
+[ext_resource type="Texture2D" uid="uid://8d0xeimdiad1" path="res://Objects/Units/Swordsman/SpriteSheets/Green.png" id="2_2xcng"]
+[ext_resource type="Texture2D" uid="uid://e0g7ubpkt1a2" path="res://Objects/Units/Swordsman/SpriteSheets/Purple.png" id="3_13848"]
+[ext_resource type="Texture2D" uid="uid://xman5eovhxfi" path="res://Objects/Units/Swordsman/SpriteSheets/Red.png" id="4_ce35m"]
+[ext_resource type="Texture2D" uid="uid://d0wrby5w8eau1" path="res://Objects/Units/Swordsman/SpriteSheets/White.png" id="5_4dg2y"]
+
+[resource]
+script = ExtResource("1_07li1")
+Type = 1
+Health = 15.0
+Name = "Swordsman"
+SpriteSheetColumns = 5
+SpriteSheetRows = 12
+SpriteSheetWhite = ExtResource("5_4dg2y")
+SpriteSheetBlue = ExtResource("1_x3p2t")
+SpriteSheetRed = ExtResource("4_ce35m")
+SpriteSheetGreen = ExtResource("2_2xcng")
+SpriteSheetPurple = ExtResource("3_13848")

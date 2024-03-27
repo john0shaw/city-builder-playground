@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6ey1v654xnk3"]
+[gd_scene load_steps=13 format=3 uid="uid://c6ey1v654xnk3"]
 
 [ext_resource type="Script" path="res://Objects/Units/UnitNode.cs" id="1_bjvp6"]
+[ext_resource type="Script" path="res://Objects/Generic/SpriteComponent.cs" id="2_qjace"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/UnitAnimationComponent.cs" id="3_d2cm1"]
-[ext_resource type="Script" path="res://Scripts/Components/SpriteComponent.cs" id="4_2gdcc"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/NavigationComponent.cs" id="4_xo8q1"]
-[ext_resource type="Script" path="res://Scripts/Components/StateMachineComponent/StateComponent.cs" id="6_ao3sa"]
+[ext_resource type="Script" path="res://Objects/Generic/StateMachineComponent.cs" id="5_w0wg2"]
+[ext_resource type="Script" path="res://Objects/Generic/StateMachineComponent/StateComponent.cs" id="6_0l1xm"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/States/MoveToPosition.cs" id="7_wcp6k"]
-[ext_resource type="Script" path="res://Scripts/Components/StateMachineComponent.cs" id="8_c0m86"]
+[ext_resource type="Script" path="res://Objects/Generic/HealthComponent.cs" id="8_ugotk"]
 
 [sub_resource type="Animation" id="Animation_genhb"]
 length = 0.001
@@ -41,7 +42,7 @@ script = ExtResource("1_bjvp6")
 [node name="SpriteComponent" type="Sprite2D" parent="."]
 hframes = 5
 vframes = 12
-script = ExtResource("4_2gdcc")
+script = ExtResource("2_qjace")
 
 [node name="AnimationComponent" type="AnimationPlayer" parent="."]
 libraries = {
@@ -60,23 +61,35 @@ debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 script = ExtResource("4_xo8q1")
 
+[node name="HealthComponent" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -14.0
+offset_right = 12.0
+offset_bottom = -9.0
+script = ExtResource("8_ugotk")
+
+[node name="ColorRect" type="ColorRect" parent="HealthComponent"]
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 5.0
+color = Color(1, 0, 0, 1)
+
 [node name="StateMachineComponent" type="Label" parent="."]
 custom_minimum_size = Vector2(75, 0)
 offset_left = -39.0
-offset_top = -20.0
+offset_top = -26.0
 offset_right = 41.0
-offset_bottom = -6.0
+offset_bottom = -12.0
 text = "STATE"
 label_settings = SubResource("LabelSettings_73b6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
-script = ExtResource("8_c0m86")
-Debug = true
+script = ExtResource("5_w0wg2")
 InitialState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachineComponent"]
-script = ExtResource("6_ao3sa")
+script = ExtResource("6_0l1xm")
 
 [node name="MoveToPosition" type="Node" parent="StateMachineComponent"]
 script = ExtResource("7_wcp6k")

@@ -10,11 +10,13 @@ public partial class StateMachineComponent : Label
 {
     [Signal] public delegate void state_changeEventHandler(string stateName, Dictionary payload = null);
 
-    [Export] public bool Debug = false;
+    [Export] public bool DebugEnabled = false;
     [Export] protected NodePath InitialState;
 
     public StateComponent State;
     public Node RootNode;
+
+    private bool _debugEnabled = false;
 
     /// <summary>
     /// Set up the state machine
@@ -23,7 +25,7 @@ public partial class StateMachineComponent : Label
     {
         RootNode = GetOwner<Node>();
         State = GetNode<StateComponent>(InitialState);
-        Visible = Debug;
+        SetDebug(DebugEnabled);
 
         foreach (StateComponent childState in GetChildren())
         {
@@ -32,6 +34,11 @@ public partial class StateMachineComponent : Label
         }
         State.Enter();
         Text = State.Name;
+    }
+
+    public void SetDebug(bool enabled)
+    {
+        Visible = enabled;
     }
 
     /// <summary>

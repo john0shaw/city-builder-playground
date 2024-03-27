@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://f44qs6dwr2vg"]
+
+[ext_resource type="PackedScene" uid="uid://c6ey1v654xnk3" path="res://Objects/Units/Unit.tscn" id="1_n7ugp"]
+[ext_resource type="Resource" uid="uid://dw640cigq0ljk" path="res://Objects/Units/Swordsman/Swordsman.tres" id="2_5caku"]
+[ext_resource type="Texture2D" uid="uid://d0wrby5w8eau1" path="res://Objects/Units/Swordsman/SpriteSheets/White.png" id="3_uqixn"]
+[ext_resource type="AnimationLibrary" uid="uid://bawuqdwpgtp36" path="res://Objects/Units/Swordsman/Animations/Action.res" id="4_5qhir"]
+[ext_resource type="AnimationLibrary" uid="uid://chro4is5pui0a" path="res://Objects/Units/Swordsman/Animations/Idle.res" id="5_1uhb5"]
+[ext_resource type="AnimationLibrary" uid="uid://vbprpo7mivf2" path="res://Objects/Units/Swordsman/Animations/Walk.res" id="6_c5q2j"]
+
+[sub_resource type="Animation" id="Animation_genhb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteComponent:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ey0db"]
+_data = {
+"RESET": SubResource("Animation_genhb")
+}
+
+[node name="Swordsman" instance=ExtResource("1_n7ugp")]
+Resource = ExtResource("2_5caku")
+
+[node name="SpriteComponent" parent="." index="0"]
+texture = ExtResource("3_uqixn")
+
+[node name="AnimationComponent" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_ey0db"),
+"Action": ExtResource("4_5qhir"),
+"Idle": ExtResource("5_1uhb5"),
+"Walk": ExtResource("6_c5q2j")
+}

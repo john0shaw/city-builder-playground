@@ -6,15 +6,18 @@ using System;
 /// </summary>
 public partial class SpriteComponent : Sprite2D
 {
-    [Export] public BuildableObjectResource.ColorEnum Color;
+    private BuildableObjectResource.ColorEnum _color;
 
     /// <summary>
     /// Configure the SpriteComponent
     /// </summary>
     /// <param name="resource"></param>
-	public void Initialize(BuildableObjectResource resource)
+	public void Initialize(BuildableObjectResource resource, BuildableObjectResource.ColorEnum color)
 	{
+        _color = color;
         SetSprite(resource);
+        Hframes = resource.SpriteSheetColumns;
+        Vframes = resource.SpriteSheetRows;
 	}
 
     /// <summary>
@@ -23,7 +26,7 @@ public partial class SpriteComponent : Sprite2D
     /// <param name="resource"></param>
     private void SetSprite(BuildableObjectResource resource)
     {
-        switch (Color)
+        switch (_color)
         {
             case BuildableObjectResource.ColorEnum.White:
                 Texture = resource.SpriteSheetWhite;
