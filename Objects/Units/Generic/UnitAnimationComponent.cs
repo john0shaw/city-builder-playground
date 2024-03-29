@@ -16,6 +16,10 @@ public partial class UnitAnimationComponent : AnimationPlayer
 	public void Initialize(UnitNode unitNode)
 	{
 		_unitNode = unitNode;
+
+		AddAnimationLibrary("Idle", unitNode.Resource.AnimationIdle);
+		AddAnimationLibrary("Walk", unitNode.Resource.AnimationWalk);
+		AddAnimationLibrary("Action", unitNode.Resource.AnimationAction);
 	}
 
 	/// <summary>

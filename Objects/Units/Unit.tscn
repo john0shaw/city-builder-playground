@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6ey1v654xnk3"]
+[gd_scene load_steps=16 format=3 uid="uid://c6ey1v654xnk3"]
 
 [ext_resource type="Script" path="res://Objects/Units/UnitNode.cs" id="1_bjvp6"]
 [ext_resource type="Script" path="res://Objects/Generic/SpriteComponent.cs" id="2_qjace"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/UnitAnimationComponent.cs" id="3_d2cm1"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/NavigationComponent.cs" id="4_xo8q1"]
 [ext_resource type="Script" path="res://Objects/Generic/StateMachineComponent.cs" id="5_w0wg2"]
-[ext_resource type="Script" path="res://Objects/Generic/StateMachineComponent/StateComponent.cs" id="6_0l1xm"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/States/Idle.cs" id="7_1y8gx"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/States/MoveToPosition.cs" id="7_wcp6k"]
 [ext_resource type="Script" path="res://Objects/Generic/HealthComponent.cs" id="8_ugotk"]
+[ext_resource type="Script" path="res://Objects/Generic/DetectionComponent.cs" id="9_rcdl8"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/States/ChaseEnemy.cs" id="9_uv3lg"]
 
 [sub_resource type="Animation" id="Animation_genhb"]
 length = 0.001
@@ -36,7 +38,12 @@ font_size = 10
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pdnel"]
+radius = 100.0
+
 [node name="Unit" type="CharacterBody2D"]
+collision_layer = 3
+slide_on_ceiling = false
 script = ExtResource("1_bjvp6")
 
 [node name="SpriteComponent" type="Sprite2D" parent="."]
@@ -88,8 +95,27 @@ uppercase = true
 script = ExtResource("5_w0wg2")
 InitialState = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachineComponent"]
-script = ExtResource("6_0l1xm")
+[node name="Idle" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Detection")]
+script = ExtResource("7_1y8gx")
+Detection = NodePath("../../DetectionComponent")
 
-[node name="MoveToPosition" type="Node" parent="StateMachineComponent"]
+[node name="MoveToPosition" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Navigation")]
 script = ExtResource("7_wcp6k")
+Navigation = NodePath("../../NavigationComponent")
+
+[node name="ChaseEnemy" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Detection", "Navigation")]
+script = ExtResource("9_uv3lg")
+Detection = NodePath("../../DetectionComponent")
+Navigation = NodePath("../../NavigationComponent")
+
+[node name="DetectionComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("9_rcdl8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionComponent"]
+shape = SubResource("CircleShape2D_pdnel")
+debug_color = Color(0.980392, 0, 0, 0.109804)
+
+[connection signal="body_entered" from="DetectionComponent" to="DetectionComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="DetectionComponent" to="DetectionComponent" method="_on_body_exited"]

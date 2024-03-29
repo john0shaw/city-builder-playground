@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfck46t70pa6k"]
+[gd_scene load_steps=16 format=3 uid="uid://dfck46t70pa6k"]
 
+[ext_resource type="Script" path="res://Scripts/Nodes/GameManagerNode.cs" id="1_7lun0"]
 [ext_resource type="Script" path="res://Scripts/World/WorldNode.cs" id="2_penyd"]
 [ext_resource type="TileSet" uid="uid://b1pywjulbn430" path="res://Media/Art/World/WorldTileSet.tres" id="3_86f0b"]
 [ext_resource type="Script" path="res://Scripts/World/WorldTileMapNode.cs" id="4_kb38u"]
 [ext_resource type="Script" path="res://Scripts/World/TileData.cs" id="5_mdkhl"]
-[ext_resource type="PackedScene" uid="uid://f44qs6dwr2vg" path="res://Objects/Units/Swordsman/Swordsman.tscn" id="6_87gid"]
-[ext_resource type="PackedScene" uid="uid://dtrkg1pjlqrao" path="res://Objects/Units/Worker/Worker.tscn" id="6_l73y3"]
+[ext_resource type="PackedScene" uid="uid://c6ey1v654xnk3" path="res://Objects/Units/Unit.tscn" id="6_b1vn5"]
+[ext_resource type="Resource" uid="uid://dr0gf04lj3y48" path="res://Objects/Units/Worker/Worker.tres" id="7_rc12j"]
 [ext_resource type="Script" path="res://Scripts/Nodes/OverviewCameraNode.cs" id="8_8vhgp"]
+[ext_resource type="Resource" uid="uid://dw640cigq0ljk" path="res://Objects/Units/Swordsman/Swordsman.tres" id="8_a8oqc"]
 
 [sub_resource type="Resource" id="Resource_cvrht"]
 script = ExtResource("5_mdkhl")
@@ -41,6 +43,7 @@ AlternativeTile = 0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_je4ao"]
 
 [node name="GameManager" type="Node2D"]
+script = ExtResource("1_7lun0")
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_penyd")
@@ -59,11 +62,13 @@ AlternativeGrass = [SubResource("Resource_dn5x5"), SubResource("Resource_s3sgx")
 
 [node name="CharacterManager" type="Node" parent="World"]
 
-[node name="Worker" parent="World/CharacterManager" instance=ExtResource("6_l73y3")]
-DebugEnabled = false
+[node name="Worker" parent="World/CharacterManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(-79, -34)
+Resource = ExtResource("7_rc12j")
 
-[node name="Swordsman" parent="World/CharacterManager" instance=ExtResource("6_87gid")]
-position = Vector2(105, -21)
+[node name="Swordsman" parent="World/CharacterManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(53, 60)
+Resource = ExtResource("8_a8oqc")
 Color = 2
 
 [node name="ResourceManager" type="Node" parent="World"]

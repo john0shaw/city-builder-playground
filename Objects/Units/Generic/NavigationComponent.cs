@@ -9,9 +9,9 @@ public partial class NavigationComponent : NavigationAgent2D
 {
     [Signal] public delegate void arrived_at_targetEventHandler();
 
-    [Export] public float Speed = 10f;
     [Export] public float TargetDeadband = 1f;
 
+    float Speed = 10f;
     public bool Moving;
     public UnitNode UnitNode;
 
@@ -27,6 +27,7 @@ public partial class NavigationComponent : NavigationAgent2D
     public void Initialize(UnitNode unit)
     {
         UnitNode = unit;
+        Speed = unit.Resource.Speed;
     }
 
     /// <summary>

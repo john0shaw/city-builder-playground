@@ -3,15 +3,6 @@ using System;
 
 public partial class BuildableObjectResource : Resource
 {
-    public enum ColorEnum
-    {
-        White,
-        Blue,
-        Red,
-        Green,
-        Purple
-    };
-
     [Export] public string Name;
 
     [ExportGroup("SpriteSheets")]

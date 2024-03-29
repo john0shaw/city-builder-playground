@@ -6,13 +6,13 @@ using System;
 /// </summary>
 public partial class SpriteComponent : Sprite2D
 {
-    private BuildableObjectResource.ColorEnum _color;
+    private Team.ColorEnum _color;
 
     /// <summary>
     /// Configure the SpriteComponent
     /// </summary>
     /// <param name="resource"></param>
-	public void Initialize(BuildableObjectResource resource, BuildableObjectResource.ColorEnum color)
+	public void Initialize(BuildableObjectResource resource, Team.ColorEnum color)
 	{
         _color = color;
         SetSprite(resource);
@@ -28,19 +28,19 @@ public partial class SpriteComponent : Sprite2D
     {
         switch (_color)
         {
-            case BuildableObjectResource.ColorEnum.White:
+            case Team.ColorEnum.White:
                 Texture = resource.SpriteSheetWhite;
                 break;
-            case BuildableObjectResource.ColorEnum.Purple:
+            case Team.ColorEnum.Purple:
                 Texture = resource.SpriteSheetPurple;
                 break;
-            case BuildableObjectResource.ColorEnum.Blue:
+            case Team.ColorEnum.Blue:
                 Texture = resource.SpriteSheetBlue;
                 break;
-            case BuildableObjectResource.ColorEnum.Green:
+            case Team.ColorEnum.Green:
                 Texture = resource.SpriteSheetGreen;
                 break;
-            case BuildableObjectResource.ColorEnum.Red:
+            case Team.ColorEnum.Red:
                 Texture = resource.SpriteSheetRed;
                 break;
         }
