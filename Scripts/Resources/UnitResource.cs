@@ -29,6 +29,8 @@ public partial class UnitResource : BuildableObjectResource
     [ExportGroup("Combat")]
     [Export] public CombatTypeEnum CombatType = CombatTypeEnum.NoAttack;
     [Export] public float CombatRange = 25f;
+    [Export] public float CombatDamageMin;
+    [Export] public float CombatDamageMax;
     [Export] public PackedScene CombatProjectile;
 
     [ExportGroup("Animations")]

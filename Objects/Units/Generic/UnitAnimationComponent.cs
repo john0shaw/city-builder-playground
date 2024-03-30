@@ -1,11 +1,14 @@
 using Godot;
 using System;
+using System.Diagnostics.Contracts;
 
 /// <summary>
 /// Handles basic unit animation based on velocity and if an action is being done
 /// </summary>
 public partial class UnitAnimationComponent : AnimationPlayer
 {
+	[Signal] public delegate void ActionTriggeredEventHandler();
+
 	private UnitNode _unitNode;
 	private bool _inActionAnimation = false;
 
@@ -62,6 +65,11 @@ public partial class UnitAnimationComponent : AnimationPlayer
     }
 
 	/// <summary>
+	/// Send off the action_trigger signal
+	/// </summary>
+	public void TriggerAction() => EmitSignal(SignalName.ActionTriggered);
+
+	/// <summary>
 	/// Play the action animation and block other animations until complete.  Relevant
 	/// action animation is based on position to nodeForAction
 	/// </summary>
@@ -69,28 +77,13 @@ public partial class UnitAnimationComponent : AnimationPlayer
 	public async void PlayActionAnimation(Node2D nodeForAction)
 	{
 		_inActionAnimation = true;
+		Vector2 direction = _unitNode.GlobalPosition.DirectionTo(nodeForAction.GlobalPosition);
 
-        if (_unitNode.GlobalPosition.Y > nodeForAction.GlobalPosition.Y)
-        {
-            Play("ActionUp");
-        }
-        else if (_unitNode.GlobalPosition.Y < nodeForAction.GlobalPosition.Y)
-        {
-            Play("ActionDown");
-        }
-        else if (_unitNode.GlobalPosition.X > nodeForAction.GlobalPosition.X)
-        {
-            Play("ActionRight");
-        }
-        else if (_unitNode.GlobalPosition.X < nodeForAction.GlobalPosition.X)
-        {
-            Play("ActionLeft");
-        }
-        else
-        {
-            Play("ActionDown");
-        }
-
+		if (direction == Vector2.Up) Play("Action/Up");
+		else if (direction == Vector2.Right) Play("Action/Right");
+		else if (direction == Vector2.Left) Play("Action/Left");
+		else Play("Action/Down");
+		
         await ToSignal(this, "animation_finished");
         _inActionAnimation = false;
     }

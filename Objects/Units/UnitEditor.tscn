@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b575318wgut4t"]
+
+[ext_resource type="PackedScene" uid="uid://c6ey1v654xnk3" path="res://Objects/Units/Unit.tscn" id="1_53xx2"]
+[ext_resource type="Texture2D" uid="uid://dr8omeuu01ypa" path="res://Objects/Units/Worker/SpriteSheets/White.png" id="2_s7au1"]
+[ext_resource type="AnimationLibrary" uid="uid://dp4qft6jv25sg" path="res://Objects/Units/Worker/Animations/Action.res" id="3_ob0q1"]
+
+[sub_resource type="Animation" id="Animation_genhb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteComponent:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ey0db"]
+_data = {
+"RESET": SubResource("Animation_genhb")
+}
+
+[node name="Unit" instance=ExtResource("1_53xx2")]
+
+[node name="SpriteComponent" parent="." index="0"]
+texture = ExtResource("2_s7au1")
+
+[node name="AnimationComponent" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_ey0db"),
+"Action": ExtResource("3_ob0q1")
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6ey1v654xnk3"]
+[gd_scene load_steps=17 format=3 uid="uid://c6ey1v654xnk3"]
 
 [ext_resource type="Script" path="res://Objects/Units/UnitNode.cs" id="1_bjvp6"]
 [ext_resource type="Script" path="res://Objects/Generic/SpriteComponent.cs" id="2_qjace"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Objects/Generic/HealthComponent.cs" id="8_ugotk"]
 [ext_resource type="Script" path="res://Objects/Generic/DetectionComponent.cs" id="9_rcdl8"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/States/ChaseEnemy.cs" id="9_uv3lg"]
+[ext_resource type="Script" path="res://Objects/Units/Generic/States/Attack.cs" id="10_s3mfg"]
 
 [sub_resource type="Animation" id="Animation_genhb"]
 length = 0.001
@@ -93,6 +94,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 script = ExtResource("5_w0wg2")
+DebugEnabled = true
 InitialState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Detection")]
@@ -108,6 +110,11 @@ script = ExtResource("9_uv3lg")
 Detection = NodePath("../../DetectionComponent")
 Navigation = NodePath("../../NavigationComponent")
 
+[node name="Attack" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Animation", "Detection")]
+script = ExtResource("10_s3mfg")
+Animation = NodePath("../../AnimationComponent")
+Detection = NodePath("../../DetectionComponent")
+
 [node name="DetectionComponent" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -117,5 +124,6 @@ script = ExtResource("9_rcdl8")
 shape = SubResource("CircleShape2D_pdnel")
 debug_color = Color(0.980392, 0, 0, 0.109804)
 
+[connection signal="Died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="body_entered" from="DetectionComponent" to="DetectionComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="DetectionComponent" to="DetectionComponent" method="_on_body_exited"]

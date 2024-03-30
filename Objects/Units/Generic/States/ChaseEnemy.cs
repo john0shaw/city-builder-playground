@@ -34,7 +34,7 @@ namespace State
             // If we're in attacking range, start attacking
             if (closestEnemy.GlobalPosition.DistanceTo(Detection.GlobalPosition) <= AttackRange)
             {
-                StateMachine.ChangeTo(Attack.StateName);
+                StateMachine.ChangeTo(Attack.StateName, new Dictionary { { Attack.TARGET_KEY, closestEnemy} });
                 return;
             }
 

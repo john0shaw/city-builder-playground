@@ -14,17 +14,6 @@ public partial class StateComponent : Node
     public const string StateName = "StateComponent";
 
     /// <summary>
-    /// Change the node name to match the given state name
-    /// </summary>
-    public override void _Ready()
-    {
-        if (StateName == "StateComponent")
-            Log.Error($"'{StateMachine.RootNode.Name}' has default named StateComponent class on '{Name}'");
-
-        Name = StateName;
-    }
-
-    /// <summary>
     /// Non-Physics tasks for the state
     /// </summary>
     /// <param name="delta"></param>

@@ -7,7 +7,6 @@ public partial class UnitNode : CharacterBody2D
 {
 	[Export] public UnitResource Resource;
 	[Export] public Team.ColorEnum Color;
-	[Export] public bool DebugEnabled;
 
 	public UnitAnimationComponent Animation;
     public SpriteComponent Sprite;
@@ -16,22 +15,22 @@ public partial class UnitNode : CharacterBody2D
 	public HealthComponent Health;
 	public DetectionComponent Detection;
 
-	// Called when the node enters the scene tree for the first time.
+	/// <summary>
+	/// Setup the node references and initial state
+	/// </summary>
 	public override void _Ready()
 	{
 		InitializeChildren();
 		InitializeStates();
-		SetDebug(DebugEnabled);
 	}
 
 	/// <summary>
-	/// Show/Hide debug states
+	/// Take damage from some source
 	/// </summary>
-	/// <param name="enabled"></param>
-	public void SetDebug(bool enabled)
+	/// <param name="damage"></param>
+	public void TakeDamage(float damage)
 	{
-		StateMachine.SetDebug(enabled);
-		Navigation.DebugEnabled = enabled;
+		Health.TakeDamage(damage);
 	}
 
 	/// <summary>
@@ -55,6 +54,8 @@ public partial class UnitNode : CharacterBody2D
 		State.Attack attack = GetNode<State.Attack>("StateMachineComponent/Attack");
 
 		idle.IsAttacker = Resource.IsAttacker();
+		attack.DamageMin = Resource.CombatDamageMin;
+		attack.DamageMax = Resource.CombatDamageMax;
 	}
 
 	/// <summary>
@@ -75,4 +76,13 @@ public partial class UnitNode : CharacterBody2D
         Health.Initialize(Resource);
         Detection.SetEnemyFilter(Team.GetOtherTeamColors(Color));
     }
+
+	/// <summary>
+	/// If we've died, clean up and remove
+	/// </summary>
+	public void _on_health_component_died()
+	{
+		Log.Info($"{Name} has died");
+		QueueFree();
+	}
 }

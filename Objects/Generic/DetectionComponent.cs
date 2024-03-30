@@ -10,10 +10,6 @@ public partial class DetectionComponent : Area2D
 {
 	[Export] public float Range = 100f;
 
-	[ExportGroup("Detection")]
-	[Export] public bool DetectEnemies = false;
-	[Export] public bool DetectResources = false;
-
 	public Array<UnitNode> Enemies = new();
 	public Array<Node> Resources = new();
 
@@ -76,7 +72,7 @@ public partial class DetectionComponent : Area2D
 	/// <param name="node"></param>
     public void _on_body_entered(Node2D node)
 	{
-		if (DetectEnemies && node is UnitNode unitNode && _enemyFilter.Contains(unitNode.Color) && !Enemies.Contains(unitNode))
+		if (node is UnitNode unitNode && _enemyFilter.Contains(unitNode.Color) && !Enemies.Contains(unitNode))
 		{
 			Enemies.Add(unitNode);
 		}
