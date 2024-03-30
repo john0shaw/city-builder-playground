@@ -8,12 +8,21 @@ public partial class UnitNode : CharacterBody2D
 	[Export] public UnitResource Resource;
 	[Export] public Team.ColorEnum Color;
 
-	public UnitAnimationComponent Animation;
+	
+	public bool Selected
+	{
+		get => _selected;
+		set => SelectedIndicator.Visible = _selected = value;
+	}
+    private bool _selected;
+
+    public UnitAnimationComponent Animation;
     public SpriteComponent Sprite;
     public StateMachineComponent StateMachine;
     public NavigationComponent Navigation;
 	public HealthComponent Health;
 	public DetectionComponent Detection;
+	public Sprite2D SelectedIndicator;
 
 	/// <summary>
 	/// Setup the node references and initial state
@@ -30,20 +39,9 @@ public partial class UnitNode : CharacterBody2D
 	/// <param name="damage"></param>
 	public void TakeDamage(float damage)
 	{
-		Health.TakeDamage(damage);
+		if (Health.Current > 0)
+			Health?.TakeDamage(damage);
 	}
-
-	/// <summary>
-	/// TESTING ONLY
-	/// </summary>
-	/// <param name="event"></param>
-    public override void _Input(InputEvent @event)
-    {
-        if (Mouse.IsRightClick(@event) && Color == GameManagerNode.Instance.PlayerColor)
-		{
-			StateMachine.ChangeTo(State.MoveToPosition.StateName, new Dictionary { { State.MoveToPosition.POSITION_KEY, GetGlobalMousePosition() }  } );
-		}
-    }
 
 	/// <summary>
 	/// Set state-specific options based on UnitResource
@@ -69,6 +67,7 @@ public partial class UnitNode : CharacterBody2D
         Sprite = GetNode<SpriteComponent>("SpriteComponent");
         Health = GetNode<HealthComponent>("HealthComponent");
         Detection = GetNode<DetectionComponent>("DetectionComponent");
+		SelectedIndicator = GetNode<Sprite2D>("SelectedIndicator");
 
         Animation.Initialize(this);
         Navigation.Initialize(this);

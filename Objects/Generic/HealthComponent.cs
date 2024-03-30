@@ -8,8 +8,8 @@ public partial class HealthComponent : ColorRect
 {
 	[Signal] public delegate void DiedEventHandler();
 	
-	public float MaxHealth;
-	public float Health;
+	public float Max;
+	public float Current;
 
 	private ColorRect _healthBar;
 
@@ -25,7 +25,7 @@ public partial class HealthComponent : ColorRect
 	/// <param name="resource"></param>
 	public void Initialize(UnitResource resource)
 	{
-		MaxHealth = Health = resource.Health;
+		Max = Current = resource.Health;
 		OnHealthChanged();
 	}
 
@@ -35,10 +35,10 @@ public partial class HealthComponent : ColorRect
 	/// <param name="amount"></param>
 	public void TakeDamage(float amount)
 	{
-		Health -= amount;
+		Current -= amount;
 
-		if (Health < 0)
-			Health = 0;
+		if (Current < 0)
+			Current = 0;
 
 		OnHealthChanged();
 	}
@@ -49,10 +49,10 @@ public partial class HealthComponent : ColorRect
 	/// <param name="amount"></param>
 	public void Heal(float amount)
 	{
-		Health += amount;
+		Current += amount;
 
-		if (Health > MaxHealth)
-			Health = MaxHealth;
+		if (Current > Max)
+			Current = Max;
 
 		OnHealthChanged();
 	}
@@ -62,10 +62,13 @@ public partial class HealthComponent : ColorRect
 	/// </summary>
 	private void OnHealthChanged()
 	{
-        _healthBar.SetSize(new Vector2((Health / MaxHealth) * Size.X, _healthBar.Size.Y));
-        if (Health <= 0)
+        if (Current <= 0)
 		{
 			EmitSignal(SignalName.Died);
 		}
+		else
+		{
+            _healthBar.SetSize(new Vector2((Current / Max) * Size.X, _healthBar.Size.Y));
+        }
 	}
 }

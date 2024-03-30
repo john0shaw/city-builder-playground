@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6ey1v654xnk3"]
+[gd_scene load_steps=18 format=3 uid="uid://c6ey1v654xnk3"]
 
 [ext_resource type="Script" path="res://Objects/Units/UnitNode.cs" id="1_bjvp6"]
 [ext_resource type="Script" path="res://Objects/Generic/SpriteComponent.cs" id="2_qjace"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Objects/Generic/DetectionComponent.cs" id="9_rcdl8"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/States/ChaseEnemy.cs" id="9_uv3lg"]
 [ext_resource type="Script" path="res://Objects/Units/Generic/States/Attack.cs" id="10_s3mfg"]
+[ext_resource type="Texture2D" uid="uid://bq2jtu6gmvo2m" path="res://Media/Art/Effects/UnitShadow.png" id="12_sg4xe"]
 
 [sub_resource type="Animation" id="Animation_genhb"]
 length = 0.001
@@ -47,6 +48,11 @@ collision_layer = 3
 slide_on_ceiling = false
 script = ExtResource("1_bjvp6")
 
+[node name="SelectedIndicator" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("12_sg4xe")
+
 [node name="SpriteComponent" type="Sprite2D" parent="."]
 hframes = 5
 vframes = 12
@@ -64,8 +70,6 @@ shape = SubResource("CircleShape2D_nsafl")
 
 [node name="NavigationComponent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-debug_enabled = true
-debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 script = ExtResource("4_xo8q1")
 
@@ -94,7 +98,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 script = ExtResource("5_w0wg2")
-DebugEnabled = true
 InitialState = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachineComponent" node_paths=PackedStringArray("Detection")]

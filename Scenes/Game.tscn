@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dfck46t70pa6k"]
+[gd_scene load_steps=18 format=3 uid="uid://dfck46t70pa6k"]
 
 [ext_resource type="Script" path="res://Scripts/Nodes/GameManagerNode.cs" id="1_7lun0"]
 [ext_resource type="Script" path="res://Scripts/World/WorldNode.cs" id="2_penyd"]
@@ -6,9 +6,11 @@
 [ext_resource type="Script" path="res://Scripts/World/WorldTileMapNode.cs" id="4_kb38u"]
 [ext_resource type="Script" path="res://Scripts/World/TileData.cs" id="5_mdkhl"]
 [ext_resource type="PackedScene" uid="uid://c6ey1v654xnk3" path="res://Objects/Units/Unit.tscn" id="6_b1vn5"]
+[ext_resource type="Script" path="res://Scripts/Nodes/UnitManagerNode.cs" id="6_eaoho"]
 [ext_resource type="Resource" uid="uid://dr0gf04lj3y48" path="res://Objects/Units/Worker/Worker.tres" id="7_rc12j"]
 [ext_resource type="Script" path="res://Scripts/Nodes/OverviewCameraNode.cs" id="8_8vhgp"]
 [ext_resource type="Resource" uid="uid://dw640cigq0ljk" path="res://Objects/Units/Swordsman/Swordsman.tres" id="8_a8oqc"]
+[ext_resource type="Script" path="res://Scripts/Nodes/CursorNode.cs" id="10_r72ur"]
 
 [sub_resource type="Resource" id="Resource_cvrht"]
 script = ExtResource("5_mdkhl")
@@ -60,14 +62,33 @@ NoNavigationTile = SubResource("Resource_cvrht")
 GrassSearch = [SubResource("Resource_44oaj"), SubResource("Resource_kimtf")]
 AlternativeGrass = [SubResource("Resource_dn5x5"), SubResource("Resource_s3sgx")]
 
-[node name="CharacterManager" type="Node" parent="World"]
+[node name="UnitManager" type="Node2D" parent="World"]
+script = ExtResource("6_eaoho")
 
-[node name="Worker" parent="World/CharacterManager" instance=ExtResource("6_b1vn5")]
+[node name="Worker" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
 position = Vector2(-79, -34)
 Resource = ExtResource("7_rc12j")
+Color = 2
 
-[node name="Swordsman" parent="World/CharacterManager" instance=ExtResource("6_b1vn5")]
+[node name="Worker2" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(-47, -60)
+Resource = ExtResource("7_rc12j")
+Color = 2
+
+[node name="Swordsman" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
 position = Vector2(53, 60)
+Resource = ExtResource("8_a8oqc")
+
+[node name="Swordsman3" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(28, 82)
+Resource = ExtResource("8_a8oqc")
+
+[node name="Swordsman4" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(-3, 89)
+Resource = ExtResource("8_a8oqc")
+
+[node name="Swordsman2" parent="World/UnitManager" instance=ExtResource("6_b1vn5")]
+position = Vector2(-40, -27)
 Resource = ExtResource("8_a8oqc")
 Color = 2
 
@@ -75,14 +96,22 @@ Color = 2
 
 [node name="BuildingManager" type="Node" parent="World"]
 
-[node name="OverviewCamera" type="CharacterBody2D" parent="."]
+[node name="Control" type="Node" parent="."]
+
+[node name="OverviewCamera" type="CharacterBody2D" parent="Control"]
 visible = false
 script = ExtResource("8_8vhgp")
 
-[node name="Camera2D" type="Camera2D" parent="OverviewCamera"]
+[node name="Camera2D" type="Camera2D" parent="Control/OverviewCamera"]
 position = Vector2(2, 0)
 zoom = Vector2(2.5, 2.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OverviewCamera"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/OverviewCamera"]
 shape = SubResource("RectangleShape2D_je4ao")
 disabled = true
+
+[node name="Cursor" type="Node2D" parent="Control" node_paths=PackedStringArray("GameManager")]
+script = ExtResource("10_r72ur")
+GameManager = NodePath("../..")
+
+[node name="UI" type="CanvasLayer" parent="."]

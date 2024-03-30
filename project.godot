@@ -54,6 +54,11 @@ Down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Physics Collision"
+2d_physics/layer_2="Units"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.305882, 0.737255, 0.72549, 1)

@@ -25,10 +25,10 @@ _data = {
 
 [node name="Unit" instance=ExtResource("1_53xx2")]
 
-[node name="SpriteComponent" parent="." index="0"]
+[node name="SpriteComponent" parent="." index="1"]
 texture = ExtResource("2_s7au1")
 
-[node name="AnimationComponent" parent="." index="1"]
+[node name="AnimationComponent" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_ey0db"),
 "Action": ExtResource("3_ob0q1")
