@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ipgqhcellnck"]
+
+[ext_resource type="Script" path="res://Objects/Buildings/BuildingNode.cs" id="1_7kusd"]
+[ext_resource type="Script" path="res://Objects/Buildings/Generic/BuildingSpriteComponent.cs" id="2_v2dgx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ncle6"]
+radius = 8.0
+
+[node name="Building" type="Area2D"]
+script = ExtResource("1_7kusd")
+
+[node name="BuildingSprite" type="Sprite2D" parent="."]
+hframes = 6
+script = ExtResource("2_v2dgx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ncle6")

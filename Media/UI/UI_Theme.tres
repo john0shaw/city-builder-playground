@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c16m2lotp2yjo"]
+
+[ext_resource type="StyleBox" uid="uid://b38n2l0ybc1a5" path="res://Media/UI/BasePanelStyleBox.tres" id="1_sl6ys"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77v40"]
+bg_color = Color(0.764706, 0.517647, 0.321569, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="SystemFont" id="SystemFont_c6ayc"]
+font_names = PackedStringArray("Courier New")
+
+[resource]
+Button/styles/normal = SubResource("StyleBoxFlat_77v40")
+MarginContainer/constants/margin_bottom = 3
+MarginContainer/constants/margin_left = 3
+MarginContainer/constants/margin_right = 3
+MarginContainer/constants/margin_top = 3
+PanelContainer/styles/panel = ExtResource("1_sl6ys")
+RichTextLabel/fonts/normal_font = SubResource("SystemFont_c6ayc")

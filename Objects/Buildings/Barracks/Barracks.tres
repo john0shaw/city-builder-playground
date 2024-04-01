@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildingResource" load_steps=4 format=3 uid="uid://cmhcge2ovsfn5"]
+
+[ext_resource type="Resource" uid="uid://dw640cigq0ljk" path="res://Objects/Units/Swordsman/Swordsman.tres" id="1_a08ai"]
+[ext_resource type="Script" path="res://Scripts/Resources/BuildingResource.cs" id="1_xcss1"]
+[ext_resource type="Texture2D" uid="uid://40d0igkupbb1" path="res://Objects/Buildings/Barracks/Barracks.png" id="2_mvtav"]
+
+[resource]
+script = ExtResource("1_xcss1")
+Name = "Barracks"
+Description = "Trains soldiers to attack enemies and defend the realm."
+Health = 100.0
+CombatRange = 25.0
+AcceptsResources = Array[Object]([])
+BuildableUnits = Array[Object]([ExtResource("1_a08ai")])
+SpriteSheet = ExtResource("2_mvtav")
+Name = "Barracks"
+SpriteSheetColumns = 0
+SpriteSheetRows = 0

@@ -33,5 +33,15 @@ public static class RNG
         return _generator.RandfRange(from, to);
     }
 
+    /// <summary>
+    /// Return a random integer between from and to
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
+    public static int RandI(int from, int to)
+    {
+        return _generator.RandiRange(from, to);
+    }
 
 }

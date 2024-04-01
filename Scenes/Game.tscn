@@ -1,16 +1,41 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfck46t70pa6k"]
+[gd_scene load_steps=31 format=3 uid="uid://dfck46t70pa6k"]
 
 [ext_resource type="Script" path="res://Scripts/Nodes/GameManagerNode.cs" id="1_7lun0"]
+[ext_resource type="Resource" uid="uid://dhxl15u4xi8ba" path="res://Items/Wood.tres" id="2_0sgna"]
 [ext_resource type="Script" path="res://Scripts/World/WorldNode.cs" id="2_penyd"]
 [ext_resource type="TileSet" uid="uid://b1pywjulbn430" path="res://Media/Art/World/WorldTileSet.tres" id="3_86f0b"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/ItemCountResource.cs" id="3_uxpdu"]
+[ext_resource type="Resource" uid="uid://vwyxbxyffx34" path="res://Items/Plank.tres" id="4_8ptyk"]
 [ext_resource type="Script" path="res://Scripts/World/WorldTileMapNode.cs" id="4_kb38u"]
 [ext_resource type="Script" path="res://Scripts/World/TileData.cs" id="5_mdkhl"]
+[ext_resource type="Resource" uid="uid://bvji5rbru8kbh" path="res://Items/Stone.tres" id="5_wcibv"]
 [ext_resource type="PackedScene" uid="uid://c6ey1v654xnk3" path="res://Objects/Units/Unit.tscn" id="6_b1vn5"]
 [ext_resource type="Script" path="res://Scripts/Nodes/UnitManagerNode.cs" id="6_eaoho"]
 [ext_resource type="Resource" uid="uid://dr0gf04lj3y48" path="res://Objects/Units/Worker/Worker.tres" id="7_rc12j"]
 [ext_resource type="Script" path="res://Scripts/Nodes/OverviewCameraNode.cs" id="8_8vhgp"]
 [ext_resource type="Resource" uid="uid://dw640cigq0ljk" path="res://Objects/Units/Swordsman/Swordsman.tres" id="8_a8oqc"]
 [ext_resource type="Script" path="res://Scripts/Nodes/CursorNode.cs" id="10_r72ur"]
+[ext_resource type="PackedScene" uid="uid://ipgqhcellnck" path="res://Objects/Buildings/Building.tscn" id="10_sh3nv"]
+[ext_resource type="Resource" uid="uid://cmhcge2ovsfn5" path="res://Objects/Buildings/Barracks/Barracks.tres" id="11_c8ju7"]
+[ext_resource type="Theme" uid="uid://c16m2lotp2yjo" path="res://Media/UI/UI_Theme.tres" id="14_d8rhp"]
+[ext_resource type="Script" path="res://UI/InGame/InventoryNode.cs" id="14_op4e8"]
+[ext_resource type="StyleBox" uid="uid://0hwaavgbwbub" path="res://Media/UI/InsetPanelStyleBox.tres" id="15_3j41h"]
+[ext_resource type="PackedScene" uid="uid://bfqwswojejbbk" path="res://UI/InGame/Components/InventoryItemComponent.tscn" id="17_v3yl3"]
+
+[sub_resource type="Resource" id="Resource_wjsml"]
+script = ExtResource("3_uxpdu")
+Item = ExtResource("2_0sgna")
+Count = 25
+
+[sub_resource type="Resource" id="Resource_cgg1x"]
+script = ExtResource("3_uxpdu")
+Item = ExtResource("4_8ptyk")
+Count = 12
+
+[sub_resource type="Resource" id="Resource_wlrt5"]
+script = ExtResource("3_uxpdu")
+Item = ExtResource("5_wcibv")
+Count = 5
 
 [sub_resource type="Resource" id="Resource_cvrht"]
 script = ExtResource("5_mdkhl")
@@ -46,6 +71,7 @@ AlternativeTile = 0
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_7lun0")
+StartingItems = Array[Object]([SubResource("Resource_wjsml"), SubResource("Resource_cgg1x"), SubResource("Resource_wlrt5")])
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_penyd")
@@ -94,7 +120,10 @@ Color = 2
 
 [node name="ResourceManager" type="Node" parent="World"]
 
-[node name="BuildingManager" type="Node" parent="World"]
+[node name="BuildingManager" type="Node2D" parent="World"]
+
+[node name="Building" parent="World/BuildingManager" instance=ExtResource("10_sh3nv")]
+Resource = ExtResource("11_c8ju7")
 
 [node name="Control" type="Node" parent="."]
 
@@ -115,3 +144,65 @@ script = ExtResource("10_r72ur")
 GameManager = NodePath("../..")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Selection" type="PanelContainer" parent="UI"]
+visible = false
+offset_right = 300.0
+offset_bottom = 33.0
+theme = ExtResource("14_d8rhp")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Selection"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Selection/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Selection/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="BuildableObjects" type="PanelContainer" parent="UI/Selection/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = ExtResource("15_3j41h")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Selection/MarginContainer/VBoxContainer/BuildableObjects"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Selection/MarginContainer/VBoxContainer/BuildableObjects/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="ObjectList" type="HBoxContainer" parent="UI/Selection/MarginContainer/VBoxContainer/BuildableObjects/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/Selection/MarginContainer/VBoxContainer/BuildableObjects/MarginContainer/ScrollContainer/ObjectList"]
+layout_mode = 2
+text = "fdsa"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Selection/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Selection/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "asd"
+
+[node name="Inventory" type="PanelContainer" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.5
+offset_top = 20.0
+offset_right = 33.5
+offset_bottom = 60.0
+grow_horizontal = 2
+theme = ExtResource("14_d8rhp")
+script = ExtResource("14_op4e8")
+ItemScene = ExtResource("17_v3yl3")
+
+[node name="ItemsMargin" type="MarginContainer" parent="UI/Inventory"]
+layout_mode = 2
+
+[node name="Items" type="HBoxContainer" parent="UI/Inventory/ItemsMargin"]
+layout_mode = 2

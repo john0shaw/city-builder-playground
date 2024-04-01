@@ -8,7 +8,6 @@ public partial class UnitNode : CharacterBody2D
 	[Export] public UnitResource Resource;
 	[Export] public Team.ColorEnum Color;
 
-	
 	public bool Selected
 	{
 		get => _selected;
@@ -40,7 +39,7 @@ public partial class UnitNode : CharacterBody2D
 	public void TakeDamage(float damage)
 	{
 		if (Health.Current > 0)
-			Health?.TakeDamage(damage);
+			Health.TakeDamage(damage);
 	}
 
 	/// <summary>

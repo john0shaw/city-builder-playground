@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b88eacci1rrdh"]
+
+[ext_resource type="PackedScene" uid="uid://ipgqhcellnck" path="res://Objects/Buildings/Building.tscn" id="1_g07dl"]
+[ext_resource type="Texture2D" uid="uid://40d0igkupbb1" path="res://Objects/Buildings/Barracks/Barracks.png" id="2_1g2nq"]
+
+[node name="Building" instance=ExtResource("1_g07dl")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1g2nq")
+hframes = 6

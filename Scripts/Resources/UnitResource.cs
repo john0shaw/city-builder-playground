@@ -26,7 +26,7 @@ public partial class UnitResource : BuildableObjectResource
     [Export] public float Health;
     [Export] public float Speed = 10f;
 
-    [ExportGroup("Combat")]
+    [ExportSubgroup("Combat")]
     [Export] public CombatTypeEnum CombatType = CombatTypeEnum.NoAttack;
     [Export] public float CombatRange = 25f;
     [Export] public float CombatDamageMin;

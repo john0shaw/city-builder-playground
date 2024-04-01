@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://bvji5rbru8kbh"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/ItemResource.cs" id="1_g2guf"]
+[ext_resource type="Texture2D" uid="uid://dhcylxlc86xeo" path="res://Items/Icons/Stone.png" id="1_nksjy"]
+
+[resource]
+script = ExtResource("1_g2guf")
+Id = 2
+Name = "Stone"
+Icon = ExtResource("1_nksjy")

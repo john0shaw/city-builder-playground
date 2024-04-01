@@ -7,6 +7,7 @@ using System;
 public partial class HealthComponent : ColorRect
 {
 	[Signal] public delegate void DiedEventHandler();
+	[Signal] public delegate void HealthChangedEventHandler();
 	
 	public float Max;
 	public float Current;
@@ -70,5 +71,7 @@ public partial class HealthComponent : ColorRect
 		{
             _healthBar.SetSize(new Vector2((Current / Max) * Size.X, _healthBar.Size.Y));
         }
+
+		EmitSignal(SignalName.HealthChanged);
 	}
 }
